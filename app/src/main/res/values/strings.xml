@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Dicoding Story</string>
+    <string name="logo">Logo</string>
+    <string name="type_your_username">Email</string>
+    <string name="password">Password</string>
+    <string name="don_t_have_an_account_register_here">Don\'t have an account? Register here</string>
+    <string name="name">Name</string>
+    <string name="log_in">Log In</string>
+    <string name="register">Register</string>
+    <string name="have_an_account_log_in_here">Have an account? Log In here</string>
+    <string name="resma_adi_nugroho">Resma Adi Nugroho</string>
+    <string name="semarang_indonesia">Semarang, Indonesia</string>
+    <string name="more">More</string>
+    <string name="placeholder">Loremp ipsum dolor sit amet, dimana ada loremp disitu ada ipsum...</string>
+    <string name="date">12 January 2024</string>
+    <string name="placeholder_uname">Newt</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="insert_caption_here">Insert caption here</string>
+    <string name="caption">Caption</string>
+    <string name="share_story">Share Story</string>
+    <string name="stories_failed_to_fetch">Stories failed to fetch!</string>
+    <string name="try_again">Try again</string>
+    <string name="filepath">/0/dicodingstory/</string>
+    <string name="txt_placeholder">Loremp ipsum dolor sit amet loremp Loremp ipsum dolor sit amet loremp Loremp ipsum dolor sit amet loremp Loremp ipsum dolor sit amet loremp Loremp ipsum dolor sit amet loremp Loremp ipsum dolor sit amet loremp Loremp ipsum dolor sit amet loremp</string>
+    <string name="change_language">Change Language</string>
+    <string name="log_out">Log Out</string>
+    <string name="story_posted">Story posted</string>
+    <string name="please_select_image">Please select image</string>
+    <string name="email_is_required">Email is required</string>
+    <string name="password_is_required">Password is required</string>
+    <string name="please_fill_all_the_fields">Please fill all the fields</string>
+    <string name="welcome">Welcome</string>
+    <string name="press_back_again_to_exit">Press back again to exit</string>
+    <string name="loading">Loading...</string>
+    <string name="name_is_required">Name is required</string>
+</resources>
