@@ -9,9 +9,10 @@ object ValidationHelper {
             }
         }
         fun checkPasswordValid(password: String): String? {
-            return when{
-                password.length < 8 -> "Password must be at least 8 characters"
-                else -> null
+            return if(password.length < 8){
+                 "Password must be at least 8 characters"
+            } else {
+                 null
             }
         }
 }

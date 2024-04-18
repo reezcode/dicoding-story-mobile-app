@@ -14,12 +14,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ran.dicodingstory.R
 import androidx.core.util.Pair
-import com.ran.dicodingstory.data.remote.response.Story
+import com.ran.dicodingstory.data.local.entity.StoryResponseItem
 import com.ran.dicodingstory.ui.activities.DetailActivity
 import com.ran.dicodingstory.utils.DateHelper
 import com.ran.dicodingstory.utils.GeoLocationHelper
+import com.ran.dicodingstory.utils.toParcelable
 
-class StoryAdapter : PagingDataAdapter<Story, StoryAdapter.StoryViewHolder>(StoryComparator()){
+class StoryAdapter : PagingDataAdapter<StoryResponseItem, StoryAdapter.StoryViewHolder>(DIFF_CALLBACK){
     override fun onBindViewHolder(holder: StoryAdapter.StoryViewHolder, position: Int) {
         val story = getItem(position)
         with(holder){
@@ -28,12 +29,17 @@ class StoryAdapter : PagingDataAdapter<Story, StoryAdapter.StoryViewHolder>(Stor
                     .load(story.photoUrl)
                     .into(holder.imgPhoto)
                 tvName.text = story.name
-                tvLocation.text = GeoLocationHelper.getAddressFromLocation(story.lat ?: 0.0, story.lon ?: 0.0, holder.itemView.context)
+                tvLocation.text = if (story.lat != null && story.lon != null) {
+                    GeoLocationHelper.getAddressFromLocation(story.lat, story.lon, holder.itemView.context)
+                } else {
+                    "Location not available"
+                }
                 tvDescription.text = story.description
                 tvDate.text = story.createdAt?.let { DateHelper.formatDate(it) }
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailActivity::class.java)
-                    intent.putExtra(DetailActivity.EXTRA_STORY, story)
+                    val storyParcelable = story.toParcelable()
+                    intent.putExtra(DetailActivity.EXTRA_STORY, storyParcelable)
                     val optionsCompat: ActivityOptionsCompat =
                         ActivityOptionsCompat.makeSceneTransitionAnimation(
                             itemView.context as Activity,
@@ -65,14 +71,16 @@ class StoryAdapter : PagingDataAdapter<Story, StoryAdapter.StoryViewHolder>(Stor
         return StoryViewHolder(view)
     }
 
-    class StoryComparator : DiffUtil.ItemCallback<Story>() {
-        override fun areItemsTheSame(oldItem: Story, newItem: Story): Boolean {
-            return oldItem.id == newItem.id
-        }
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<StoryResponseItem>() {
+            override fun areItemsTheSame(oldItem: StoryResponseItem, newItem: StoryResponseItem): Boolean {
+                return oldItem.id == newItem.id
+            }
 
-        override fun areContentsTheSame(oldItem: Story, newItem: Story): Boolean {
-            return oldItem == newItem
-        }
+            override fun areContentsTheSame(oldItem: StoryResponseItem, newItem: StoryResponseItem): Boolean {
+                return oldItem == newItem
+            }
 
+        }
     }
 }

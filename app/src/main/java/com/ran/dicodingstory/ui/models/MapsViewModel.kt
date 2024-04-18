@@ -6,9 +6,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor (private val storyRepository: StoryRepository) : ViewModel() {
-
-    fun getStoriesPaging() = storyRepository.getStoriesPaging()
-
-
+class MapsViewModel @Inject constructor(private val storyRepository: StoryRepository): ViewModel() {
+    fun getStories() = storyRepository.getStories()
 }

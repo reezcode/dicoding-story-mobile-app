@@ -3,6 +3,7 @@ package com.ran.dicodingstory.di
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import com.ran.dicodingstory.data.local.room.StoryDatabase
 import com.ran.dicodingstory.data.local.source.UserPreferencesRepository
 import com.ran.dicodingstory.data.local.source.userDataStore
 import com.ran.dicodingstory.data.remote.retrofit.ApiConfig
@@ -43,7 +44,12 @@ object CommonInjection {
     }
 
     @Provides
-    fun provideStoryRepository(userPreferencesRepository: UserPreferencesRepository, apiService: ApiService): StoryRepository {
-        return StoryRepository.getInstance(userPreferencesRepository, apiService)
+    fun provideStoryDatabase(@ApplicationContext context: Context): StoryDatabase {
+        return StoryDatabase.getDatabase(context)
+    }
+
+    @Provides
+    fun provideStoryRepository(storyDatabase: StoryDatabase,userPreferencesRepository: UserPreferencesRepository, apiService: ApiService): StoryRepository {
+        return StoryRepository.getInstance(storyDatabase,userPreferencesRepository, apiService)
     }
 }

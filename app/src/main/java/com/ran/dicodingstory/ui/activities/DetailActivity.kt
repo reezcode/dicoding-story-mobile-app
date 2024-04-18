@@ -34,7 +34,11 @@ class DetailActivity : AppCompatActivity() {
                     .load(it.photoUrl)
                     .into(imgDetail)
                 tvName.text = it.name
-                tvLocation.text = GeoLocationHelper.getAddressFromLocation(story.lat ?: 0.0, story.lon ?: 0.0, this@DetailActivity)
+                tvLocation.text = if (story.lat != null && story.lon != null) {
+                    GeoLocationHelper.getAddressFromLocation(story.lat, story.lon, this@DetailActivity)
+                } else {
+                    "Location not available"
+                }
                 tvDescription.text = it.description
                 tvDate.text = it.createdAt?.let { date-> DateHelper.formatDate(date) }
             }

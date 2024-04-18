@@ -45,7 +45,6 @@ class UserPreferencesRepository (private val userDataStorePreferences: DataStore
         }
     }
 
-
      suspend fun setSession(session: Boolean) {
         Result.runCatching {
             userDataStorePreferences.edit { pref ->

@@ -46,6 +46,8 @@ class RsEditText @JvmOverloads constructor(
         })
     }
 
+    /// To run espresso testing code, PLEASE comment onDraw function below
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         textAlignment = View.TEXT_ALIGNMENT_VIEW_START

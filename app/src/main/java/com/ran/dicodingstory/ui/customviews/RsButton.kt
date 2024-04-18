@@ -25,6 +25,8 @@ class RsButton : AppCompatButton {
         textContain = text.toString()
     }
 
+    /// To run espresso testing code, PLEASE comment onDraw function below
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         background = if (isEnabled) enabledBackground else disabledBackground

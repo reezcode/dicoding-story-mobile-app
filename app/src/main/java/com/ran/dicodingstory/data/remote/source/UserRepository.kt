@@ -34,7 +34,7 @@ class UserRepository private constructor(
                 }
             }
 
-            override fun onFailure(call: retrofit2.Call<DefaultResponse>, t: Throwable) {
+            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
                 result.value = t.message?.let { Result.Error(it) }
             }
         })
@@ -58,7 +58,7 @@ class UserRepository private constructor(
                 }
             }
 
-            override fun onFailure(call: retrofit2.Call<DefaultResponse>, t: Throwable) {
+            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
                 result.value = t.message?.let { Result.Error(it) }
             }
         })

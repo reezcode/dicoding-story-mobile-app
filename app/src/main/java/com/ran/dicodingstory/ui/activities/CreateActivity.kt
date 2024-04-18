@@ -78,7 +78,10 @@ class CreateActivity : AppCompatActivity() {
     private fun postStory() {
         if(imageUri != null){
             val description = binding.etCaption.text.toString()
-            val location = GeoLocationHelper.getCurrentLatLong(this)
+            var location : Pair<Double, Double>? = null
+            if (binding.cbUseCurrentLocation.isChecked) {
+                location = GeoLocationHelper.getCurrentLatLong(this)
+            }
             val imageFile = FileHelper.uriToFile(imageUri!!, this).reduceFileImage()
             viewModel.newStory(imageFile, description, location).observe(this) {
                 when(it) {

@@ -9,5 +9,5 @@ import javax.inject.Inject
 @HiltViewModel
 class CreateViewModel @Inject constructor(private val storyRepository: StoryRepository) : ViewModel() {
 
-    fun newStory(imageFile: File, description: String, location : Pair<Double, Double>) = storyRepository.newStory(imageFile, description, location)
+    fun newStory(imageFile: File, description: String, location : Pair<Double, Double>?) = storyRepository.newStory(imageFile, description, location)
 }

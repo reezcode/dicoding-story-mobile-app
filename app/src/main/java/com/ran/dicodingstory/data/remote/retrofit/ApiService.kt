@@ -23,6 +23,12 @@ interface ApiService {
     @Headers("UserResponse-Agent: request")
     fun login(@Body body: UserBody): Call<DefaultResponse>
 
+    @GET("stories")
+    fun getStoriesWithLocation(
+        @Header("Authorization") token: String,
+        @Query("location") location : Int = 1,
+    ): Call<DefaultResponse>
+
     @Multipart
     @POST("stories")
     fun postStory(@Header("Authorization") token: String, @Part photo: MultipartBody.Part, @Part("description") description: RequestBody?, @Part("lat") lat: RequestBody?,
@@ -31,4 +37,5 @@ interface ApiService {
     @GET("stories")
     @Headers("UserResponse-Agent: request", "Content-Type: multipart/form-data")
     suspend fun getAllStory(@Header("Authorization") token: String, @Query("page") page: Int? = 1, @Query("size") size: Int? = 10, @Query("location") location: Int? = 1): DefaultResponse
+
 }

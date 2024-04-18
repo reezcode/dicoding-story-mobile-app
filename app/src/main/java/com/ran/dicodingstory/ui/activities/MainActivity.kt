@@ -14,15 +14,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ran.dicodingstory.R
 import com.ran.dicodingstory.databinding.ActivityMainBinding
 import com.ran.dicodingstory.ui.adapter.StoryAdapter
 import com.ran.dicodingstory.ui.models.MainViewModel
-import com.ran.dicodingstory.ui.models.events.MainEvent
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import kotlin.system.exitProcess
 
 @AndroidEntryPoint
@@ -56,7 +53,9 @@ class MainActivity : AppCompatActivity() {
             }
             btnSetting.setOnClickListener {
                 startActivity(Intent(this@MainActivity, SettingActivity::class.java))
-
+            }
+            btnMap.setOnClickListener {
+                startActivity(Intent(this@MainActivity, MapsActivity::class.java))
             }
         }
         if (ContextCompat.checkSelfPermission(applicationContext, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -73,26 +72,8 @@ class MainActivity : AppCompatActivity() {
             val layoutManager = LinearLayoutManager(this@MainActivity)
             rvStory.layoutManager = layoutManager
             rvStory.adapter = adapter
-            lifecycleScope.launch {
-                viewModel.getStories().collect {event ->
-                    when(event){
-                        is MainEvent.Loading -> {
-                            Toast.makeText(this@MainActivity,
-                                getString(R.string.loading), Toast.LENGTH_SHORT).show()
-                            viewModel.isFailed.observe(this@MainActivity) {
-                                if (it) {
-                                    progressBar.visibility = View.GONE
-                                    errorView.visibility = View.VISIBLE
-                                }
-                            }
-                        }
-                        is MainEvent.Success -> {
-                            val data = event.data
-                            adapter.submitData(data)
-                        }
-                        else -> {}
-                    }
-                }
+            viewModel.getStoriesPaging().observe(this@MainActivity) {
+                adapter.submitData(lifecycle, it)
             }
         }
     }
