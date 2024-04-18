@@ -10,10 +10,12 @@ What's tools and architecure that used?
 </br>
 - Gilde
 </br>
-- Infinite Scrolling with Paging Source
+- Infinite Scrolling with Paging 3 with Remote Mediator
 </br>
 - DataStore Preferences
 </br>
 - CustomViews
+</br>
+- Unit and UI Test
 </br>
 - Some common utils helper 
